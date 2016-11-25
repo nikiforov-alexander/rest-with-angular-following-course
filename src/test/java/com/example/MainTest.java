@@ -40,15 +40,13 @@ public class MainTest {
         gson = Main.getGson();
     }
 
-    @After
-    public void tearDown() throws Exception {
-        // close database connection
-        taskDao.closeDatabase();
-    }
-
     // Stop Spark Server after all tests
+    // and close database. Because it is aka "integration test"
+    // we have to close database at the end, not using
+    // @After tearDown method.
     @AfterClass
     public static void stopServer() {
+        Main.getTaskDao().closeDatabase();
         Spark.stop();
     }
 
