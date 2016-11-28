@@ -54,11 +54,13 @@ public class Main {
             // so we won't check for NumberFormatException
             port(Integer.parseInt(args[0]));
             hibernateConfigurationFile = args[1];
+        } else {
+            // we add test tasks only for production for now
+            // to leave testing database empty
+            addSomeTestTasksToDao(5);
         }
 
         taskDao = new TaskDaoImpl(hibernateConfigurationFile);
-
-        addSomeTestTasksToDao(5);
 
         // actual request methods
 
