@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.dao.TaskDao;
 import com.example.dao.TaskDaoImpl;
+import com.example.model.Task;
 import com.google.gson.Gson;
 
 import static com.example.WebConstants.CONTENT_TYPE;
@@ -19,6 +20,19 @@ public class Main {
 
     static Gson getGson() {
         return gson;
+    }
+
+    /**
+     * Adds {@literal numberOfTasks} to {@link #taskDao}
+     * for now only with name "Task 1" to "Task numberOfTasks"
+     * @param numberOfTasks : number of tasks to save
+     */
+    static void addSomeTestTasksToDao(int numberOfTasks) {
+        for (int i = 1; i < 5; i++) {
+            Task task = new Task();
+            task.setName("Task " + i);
+            taskDao.saveOrUpdate(task);
+        }
     }
 
     public static void main(String[] args) {
@@ -43,6 +57,8 @@ public class Main {
         }
 
         taskDao = new TaskDaoImpl(hibernateConfigurationFile);
+
+        addSomeTestTasksToDao(5);
 
         // actual request methods
 
