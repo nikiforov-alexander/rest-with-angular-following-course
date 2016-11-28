@@ -23,6 +23,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // this way we should expose our angular related
+        // files
+        staticFileLocation("/public");
+
         // initialization part
 
         String hibernateConfigurationFile = "hibernate.cfg.xml";
