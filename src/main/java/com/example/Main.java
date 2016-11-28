@@ -43,8 +43,6 @@ public class Main {
 
         // initialization part
 
-        String hibernateConfigurationFile = "hibernate.cfg.xml";
-
         if (args.length > 0) {
             if (args.length != 2) {
                 System.out.println("java Api <port> <hibernate.cfg.xml>");
@@ -53,14 +51,13 @@ public class Main {
             // it is not supposed to run other than testing
             // so we won't check for NumberFormatException
             port(Integer.parseInt(args[0]));
-            hibernateConfigurationFile = args[1];
+            taskDao = new TaskDaoImpl(args[1]);
         } else {
             // we add test tasks only for production for now
             // to leave testing database empty
+            taskDao = new TaskDaoImpl("hibernate.cfg.xml");
             addSomeTestTasksToDao(5);
         }
-
-        taskDao = new TaskDaoImpl(hibernateConfigurationFile);
 
         // actual request methods
 
