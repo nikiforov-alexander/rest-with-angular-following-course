@@ -14,6 +14,9 @@ angular.module("tasksListApp", [])
         console.log("adding Task");
    };
 
+   // only this way response.data will be
+   // available, and can be used to set
+   // $scope.tasks
    dataService.getTasks(
        function (response) {
             console.log(response.data);
