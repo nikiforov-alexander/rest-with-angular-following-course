@@ -74,6 +74,20 @@ public class TaskDaoImplTest {
     }
 
     @Test
+    public void taskCanBeDeletedById() throws Exception {
+        // Given that we have one Task in dao
+        Task task = new Task();
+        taskDao.saveOrUpdate(task);
+        assertThat(taskDao.findOne(1L)).isNotNull();
+
+        // When we delete task by id
+        taskDao.delete(1L);
+
+        // Then task should be deleted
+        assertThat(taskDao.findOne(1L)).isNull();
+    }
+
+    @Test
     public void taskCanBeUpdated() throws Exception {
         // Given that we add one Task to dao
         Task task = new Task();
