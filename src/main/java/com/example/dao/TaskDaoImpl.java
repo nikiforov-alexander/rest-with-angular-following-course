@@ -87,6 +87,18 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
+    public void delete(Long id) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.createQuery(
+                "DELETE FROM Task WHERE id = :id"
+        ).setParameter("id", id)
+        .executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
     public void closeDatabase() {
         sessionFactory.close();
     }

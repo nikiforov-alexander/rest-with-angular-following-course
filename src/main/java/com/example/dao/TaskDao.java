@@ -11,6 +11,7 @@ public interface TaskDao {
 
     void saveOrUpdate(Task task);
     void delete(Task task);
+    void delete(Long id);
 
     void closeDatabase();
 }
