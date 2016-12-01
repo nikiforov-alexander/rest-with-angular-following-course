@@ -67,5 +67,18 @@ public class Main {
                 (request, response) -> taskDao.findAll(),
                 gson::toJson
         );
+
+        // DELETE request:
+        delete(INDEX_PAGE_ALL_TASKS + "/:id",
+                CONTENT_TYPE,
+                (request, response) -> {
+                    Long id = new Long(
+                            request.params("id")
+                    );
+                    taskDao.delete(id);
+                    return null;
+                },
+                gson::toJson
+        );
     }
 }
