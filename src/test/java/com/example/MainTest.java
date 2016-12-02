@@ -80,4 +80,28 @@ public class MainTest {
         Task[] tasks = gson.fromJson(apiResponse.getBody(), Task[].class);
         assertThat(tasks.length).isEqualTo(5);
     }
+
+    @Test
+    public void deletingTaskWorks() throws Exception {
+        // Given 1 added test tasks to database
+        taskDao.saveOrUpdate(new Task("test task to delete"));
+
+        // When DELETE request to INDEX_PAGE_ALL_TASKS + "/1"
+        // is made
+        ApiResponse apiResponse =
+                apiClient.request("DELETE",
+                        INDEX_PAGE_ALL_TASKS + "/1");
+
+        // Then status should be 200
+        assertThat(apiResponse).hasFieldOrPropertyWithValue(
+                "status", 200
+        );
+        // Then body should be null
+        assertThat(apiResponse).hasFieldOrPropertyWithValue(
+                "body", "null"
+        );
+
+        assertThat(taskDao.findAll().size()).isEqualTo(5);
+
+    }
 }

@@ -13,5 +13,7 @@ public interface TaskDao {
     void delete(Task task);
     void delete(Long id);
 
+    Long getMaxId();
+
     void closeDatabase();
 }

@@ -109,4 +109,15 @@ public class TaskDaoImplTest {
                 "id", 1L
         );
     }
+
+    @Test
+    public void findMaxIdWorksCorrectly() throws Exception {
+        for (int i = 1; i <= 5; i++) {
+            Task task = new Task();
+            task.setName("task " + i);
+            taskDao.saveOrUpdate(task);
+        }
+
+        assertThat(taskDao.getMaxId()).isEqualTo(5L);
+    }
 }

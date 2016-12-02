@@ -98,6 +98,23 @@ public class TaskDaoImpl implements TaskDao {
         session.close();
     }
 
+    /**
+     * finds max {@code id} of all possible
+     * {@code Task}-s. Used in testing when we
+     * add and then remove something, to keep track
+     * of the highest added {@code Task}
+     * @return : max {@code id} : the id of latest added task
+     */
+    @Override
+    public Long getMaxId() {
+        Session session = sessionFactory.openSession();
+        Long maxId = (Long) session.createQuery(
+                "SELECT MAX(id) FROM Task"
+        ).getSingleResult();
+        session.close();
+        return maxId;
+    }
+
     @Override
     public void closeDatabase() {
         sessionFactory.close();
