@@ -34,6 +34,16 @@ public class Task {
         this.name = name;
     }
 
+    // constructors
+
+    public Task(String name) {
+        this.name = name;
+    }
+
+    public Task() {
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
