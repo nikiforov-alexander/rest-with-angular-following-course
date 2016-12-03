@@ -29,6 +29,15 @@ angular.module("tasksListApp", [])
    // will NOT work, because this code is executed
    // before request is made
 
+   // NOTE: methods from service will only be
+   // available when we use them here in controller
+   // simple deleteTask, without callback, works but we want
+   // do stuff on success
+   // $scope.deleteTask = function (task) {
+   //      dataService.deleteTask(task);
+   //      $scope.flashMessage = "Hello";
+   // }
+
 })
 // get tasks from server, service
 .service('dataService', function ($http) {
@@ -42,5 +51,13 @@ angular.module("tasksListApp", [])
     this.getTasks = function(callback){
         $http.get('/api/v1/tasks')
             .then(callback)
-    }
+    };
+
+    // delete task method
+    // that will simple work, see NOTE: with
+    // $scope.deleteTask = function ...
+    // in controller
+    // this.deleteTask = function (task) {
+    //     $http.delete('/api/v1/tasks/' + task.id);
+    // };
 });
