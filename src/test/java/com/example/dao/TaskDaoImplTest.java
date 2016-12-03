@@ -119,4 +119,14 @@ public class TaskDaoImplTest {
         // Then maxId should be 5
         assertThat(taskDao.getMaxId()).isEqualTo(5L);
     }
+
+    @Test
+    public void countTasksWorksCorrectly() throws Exception {
+        // Given that we have 5 added Tasks in dao
+        addTestTasksToDatabase(5);
+
+        // When we call count() method
+        // Then 5 should be returned
+        assertThat(taskDao.count()).isEqualTo(5L);
+    }
 }
