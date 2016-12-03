@@ -17,8 +17,8 @@ public class MainTest {
 
     private static final String PORT = "4568";
     private ApiClient apiClient;
-    private Gson gson;
-    private TaskDao taskDao;
+    private static Gson gson;
+    private static TaskDao taskDao;
 
     // Test preparation methods
 
@@ -28,6 +28,14 @@ public class MainTest {
         // testing database
         String[] args = {PORT, "hibernate-test.cfg.xml"};
         Main.main(args);
+        taskDao = Main.getTaskDao();
+        gson = Main.getGson();
+        // add 5 test tasks in the beginning
+        for (int i = 1; i <= 5; i++) {
+            Task task = new Task();
+            task.setName("task " + i);
+            taskDao.saveOrUpdate(task);
+        }
 
         // wait before Spark server is up
         Spark.awaitInitialization();
@@ -36,8 +44,6 @@ public class MainTest {
     @Before
     public void setUp() throws Exception {
         apiClient = new ApiClient("http://localhost:" + PORT);
-        taskDao = Main.getTaskDao();
-        gson = Main.getGson();
     }
 
     // Stop Spark Server after all tests
@@ -50,21 +56,11 @@ public class MainTest {
         Spark.stop();
     }
 
-    // private helper methods used in tests
-    private void addTestTasksToDatabase(int numberOfTasks) {
-        for (int i = 0; i < numberOfTasks; i++) {
-            Task task = new Task();
-            task.setName("task " + i);
-            taskDao.saveOrUpdate(task);
-        }
-    }
-
     // actual tests
 
     @Test
     public void getRequestToListAllTasksWorks() throws Exception {
-        // Given 5 added test tasks to database
-        addTestTasksToDatabase(5);
+        // Given taskDao with some tasks
 
         // When GET request to INDEX_PAGE_ALL_TASKS is made
         ApiResponse apiResponse =
@@ -76,21 +72,30 @@ public class MainTest {
                 "status", 200
         );
 
-        // Then 5 tasks should be returned
+        // Then size of tasks from JSON should be
+        // equal to numberOfTasks in DAO
         Task[] tasks = gson.fromJson(apiResponse.getBody(), Task[].class);
-        assertThat(tasks.length).isEqualTo(5);
+        assertThat((long) tasks.length)
+                .isEqualTo(
+                taskDao.count()
+        );
     }
 
     @Test
     public void deletingTaskWorks() throws Exception {
-        // Given 1 added test tasks to database
+        // Given 1 new test task is added to database to be
+        // deleted, and numberOfTasks calculated before addition
+        // of task to be deleted
+        Long numberOfTasksBeforeAddition = taskDao.count();
         taskDao.saveOrUpdate(new Task("test task to delete"));
+        Long idOfNewlyAddedTask = taskDao.getMaxId();
 
-        // When DELETE request to INDEX_PAGE_ALL_TASKS + "/1"
-        // is made
+        // When DELETE request to INDEX_PAGE_ALL_TASKS
+        // + "/idOfNewlyAddedTask" is made
         ApiResponse apiResponse =
                 apiClient.request("DELETE",
-                        INDEX_PAGE_ALL_TASKS + "/1");
+                        INDEX_PAGE_ALL_TASKS
+                                + "/" + idOfNewlyAddedTask);
 
         // Then status should be 200
         assertThat(apiResponse).hasFieldOrPropertyWithValue(
@@ -101,7 +106,14 @@ public class MainTest {
                 "body", "null"
         );
 
-        assertThat(taskDao.findAll().size()).isEqualTo(5);
+        // Then number of tasks should be the same as before
+        assertThat(taskDao.count())
+                .isEqualTo(numberOfTasksBeforeAddition);
 
+        // Then task with idOfNewlyAddedTask
+        // should no longer exist
+        assertThat(
+               taskDao.findOne(idOfNewlyAddedTask)
+        ).isNull();
     }
 }
