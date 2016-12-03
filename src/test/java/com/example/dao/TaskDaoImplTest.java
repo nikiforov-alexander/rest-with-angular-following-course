@@ -112,12 +112,11 @@ public class TaskDaoImplTest {
 
     @Test
     public void findMaxIdWorksCorrectly() throws Exception {
-        for (int i = 1; i <= 5; i++) {
-            Task task = new Task();
-            task.setName("task " + i);
-            taskDao.saveOrUpdate(task);
-        }
+        // Given that we have 5 added Tasks in dao
+        addTestTasksToDatabase(5);
 
+        // When we call getMaxId()
+        // Then maxId should be 5
         assertThat(taskDao.getMaxId()).isEqualTo(5L);
     }
 }
