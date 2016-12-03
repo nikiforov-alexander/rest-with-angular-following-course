@@ -15,5 +15,7 @@ public interface TaskDao {
 
     Long getMaxId();
 
+    Long count();
+
     void closeDatabase();
 }

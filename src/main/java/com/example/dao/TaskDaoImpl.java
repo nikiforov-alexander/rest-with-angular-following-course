@@ -116,6 +116,16 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
+    public Long count() {
+        Session session = sessionFactory.openSession();
+        Long count = (Long) session.createQuery(
+                "SELECT COUNT(id) FROM Task"
+        ).getSingleResult();
+        session.close();
+        return count;
+    }
+
+    @Override
     public void closeDatabase() {
         sessionFactory.close();
     }
