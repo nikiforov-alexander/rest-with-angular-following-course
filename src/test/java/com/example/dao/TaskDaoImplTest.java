@@ -129,4 +129,23 @@ public class TaskDaoImplTest {
         // Then 5 should be returned
         assertThat(taskDao.count()).isEqualTo(5L);
     }
+
+    @Test
+    public void existsReturnsTrueIfTaskExists() throws Exception {
+        // Given that we have 1 task added in dao
+        addTestTasksToDatabase(1);
+
+        // When we call exists()
+        // Then true should be returned
+        assertThat(taskDao.exists(1L)).isTrue();
+    }
+
+    @Test
+    public void existsReturnsFalseIfTaskDoesNotExist() throws Exception {
+        // Given that we have no tasks added in dao
+
+        // When we call exists()
+        // Then false should be returned
+        assertThat(taskDao.exists(1L)).isFalse();
+    }
 }
