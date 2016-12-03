@@ -6,37 +6,38 @@ angular.module("tasksListApp", [])
 // we'll get "can't find dataService" error
 .controller('MainController', function ($scope, dataService) {
 
-   // we set editing to false so that IDE
-   // also sees it, and I think it is a good practice
-   $scope.editing = false;
+    // we set editing to false so that IDE
+    // also sees it, and I think it is a good practice
+    $scope.editing = false;
 
-   $scope.addTask = function () {
-        console.log("adding Task");
-   };
 
-   // only this way response.data will be
-   // available, and can be used to set
-   // $scope.tasks
-   dataService.getTasks(
-       function (response) {
-            console.log(response.data);
-            $scope.tasks = response.data;
-       }
-   );
+    $scope.addTask = function () {
+         console.log("adding Task");
+    };
 
-   // writing here
-   // $scope.tasks = dataService.getTasks();
-   // will NOT work, because this code is executed
-   // before request is made
+    // only this way response.data will be
+    // available, and can be used to set
+    // $scope.tasks
+    dataService.getTasks(
+        function (response) {
+             console.log(response.data);
+             $scope.tasks = response.data;
+        }
+    );
 
-   // NOTE: methods from service will only be
-   // available when we use them here in controller
-   // simple deleteTask, without callback, works but we want
-   // do stuff on success
-   // $scope.deleteTask = function (task) {
-   //      dataService.deleteTask(task);
-   //      $scope.flashMessage = "Hello";
-   // }
+    // writing here
+    // $scope.tasks = dataService.getTasks();
+    // will NOT work, because this code is executed
+    // before request is made
+
+    // NOTE: methods from service will only be
+    // available when we use them here in controller
+    // simple deleteTask, without callback, works but we want
+    // do stuff on success
+    // $scope.deleteTask = function (task) {
+    //      dataService.deleteTask(task);
+    //      $scope.flashMessage = "Hello";
+    // }
 
 })
 // get tasks from server, service
