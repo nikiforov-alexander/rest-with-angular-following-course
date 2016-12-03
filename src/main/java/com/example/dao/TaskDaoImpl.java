@@ -115,6 +115,12 @@ public class TaskDaoImpl implements TaskDao {
         return maxId;
     }
 
+    /**
+     * calculates number of tasks in DAO. The SQL
+     * function {@code COUNT} is used with {@literal id}
+     * column
+     * @return : {@code Long count} : number of tasks in DAO
+     */
     @Override
     public Long count() {
         Session session = sessionFactory.openSession();
