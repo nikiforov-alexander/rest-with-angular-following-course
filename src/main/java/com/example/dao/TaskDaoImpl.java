@@ -99,6 +99,24 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     /**
+     * Checks if {@code Task} exists in DAO
+     * @param id : id of the task that is checked for
+     *           existence
+     * @return {@code true} if {@code Task} exists, and
+     * false otherwise
+     */
+    @Override
+    public boolean exists(Long id) {
+        Session session = sessionFactory.openSession();
+        Long numberOfTasksWithThisId = (Long) session.createQuery(
+                "SELECT COUNT(id) FROM Task WHERE id = :id"
+        ).setParameter("id", id)
+        .getSingleResult();
+        session.close();
+        return numberOfTasksWithThisId != 0;
+    }
+
+    /**
      * finds max {@code id} of all possible
      * {@code Task}-s. Used in testing when we
      * add and then remove something, to keep track

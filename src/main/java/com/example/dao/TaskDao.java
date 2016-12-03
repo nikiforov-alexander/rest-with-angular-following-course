@@ -13,6 +13,8 @@ public interface TaskDao {
     void delete(Task task);
     void delete(Long id);
 
+    boolean exists(Long id);
+
     Long getMaxId();
 
     Long count();
