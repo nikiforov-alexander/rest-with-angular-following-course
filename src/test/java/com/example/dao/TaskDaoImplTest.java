@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import com.example.exception.NotFoundException;
 import com.example.model.Task;
 import org.junit.After;
 import org.junit.Before;
@@ -147,5 +148,13 @@ public class TaskDaoImplTest {
         // When we call exists()
         // Then false should be returned
         assertThat(taskDao.exists(1L)).isFalse();
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void deleteNonExistingTaskThrowsException() throws Exception {
+        // Given empty dao
+        // When we delete Task with id 123L
+        // Then NotFoundException should be thrown
+        taskDao.delete(123L);
     }
 }
