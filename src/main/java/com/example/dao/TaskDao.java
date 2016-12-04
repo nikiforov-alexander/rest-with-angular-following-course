@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import com.example.exception.NotFoundException;
 import com.example.model.Task;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface TaskDao {
 
     void saveOrUpdate(Task task);
     void delete(Task task);
-    void delete(Long id);
+    void delete(Long id) throws NotFoundException;
 
     boolean exists(Long id);
 

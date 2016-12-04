@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import com.example.exception.NotFoundException;
 import com.example.model.Task;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -86,8 +87,20 @@ public class TaskDaoImpl implements TaskDao {
         session.close();
     }
 
+    /**
+     * Deletes task by {@code id},
+     * checking before whether {@code Task}
+     * exists using {@link #exists(Long)} method
+     * @param id : id of the {@code Task} to be
+     *           deleted
+     * @throws NotFoundException : is thrown when
+     * {@link #exists(Long)} method returns {@code false}
+     */
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) throws NotFoundException {
+        if (!exists(id)) {
+            throw new NotFoundException("Task with this id does not exist");
+        }
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.createQuery(
