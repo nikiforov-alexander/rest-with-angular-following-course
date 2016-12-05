@@ -2,8 +2,13 @@ package com.example;
 
 import com.example.dao.TaskDao;
 import com.example.dao.TaskDaoImpl;
+import com.example.exception.ApiError;
+import com.example.exception.NotFoundException;
 import com.example.model.Task;
 import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.example.WebConstants.CONTENT_TYPE;
 import static com.example.WebConstants.INDEX_PAGE_ALL_TASKS;
@@ -80,5 +85,16 @@ public class Main {
                 },
                 gson::toJson
         );
+
+        // exception handlers
+
+        exception(NotFoundException.class, (exception, request, response) -> {
+            Map<String, Object> jsonMap = new HashMap<>();
+            jsonMap.put("status", 404);
+            jsonMap.put("message", exception.getMessage());
+            response.type("application/json");
+            response.status(404);
+            response.body(gson.toJson(jsonMap));
+        });
     }
 }
