@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.dao.TaskDao;
+import com.example.exception.ApiError;
 import com.example.model.Task;
 import com.example.test_helpers.ApiClient;
 import com.example.test_helpers.ApiResponse;
@@ -115,5 +116,23 @@ public class MainTest {
         assertThat(
                taskDao.findOne(idOfNewlyAddedTask)
         ).isNull();
+    }
+
+    @Test
+    public void deletingNonExistingTaskThrowsException() throws Exception {
+        // Given taskDao without task 123
+        assertThat(taskDao.exists(123L)).isFalse();
+
+        // When DELETE request to INDEX_PAGE_ALL_TASKS
+        // + "/123" is made
+        ApiResponse apiResponse =
+                apiClient.request("DELETE",
+                        INDEX_PAGE_ALL_TASKS
+                                + "/" + 123);
+
+        // Then status should be 404
+        assertThat(apiResponse).hasFieldOrPropertyWithValue(
+                "status", 404
+        );
     }
 }
