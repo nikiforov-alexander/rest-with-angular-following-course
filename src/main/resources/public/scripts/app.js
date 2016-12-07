@@ -38,11 +38,14 @@ angular.module("tasksListApp", [])
     // available when we use them here in controller
     // simple deleteTask, without callback, works but we want
     // do stuff on success
-    // we create "flash" object and set its "message"
+    // 2. we create "flash" object and set its "message"
     // and "status", depending on which different CSS
     // will be applied
-    // after 3000 ms flash will disappear
-    $scope.deleteTask = function (task) {
+    // 3. after 3000 ms flash will disappear
+    // 4. @param index is taken from ng-repeat $index and
+    // passed here in order to change tasks array
+    // accordingly
+    $scope.deleteTask = function (task, index) {
          // actual service call
          dataService.deleteTask(task);
          // flash message part
@@ -54,7 +57,6 @@ angular.module("tasksListApp", [])
              $scope.flash = null;
          }, 3000);
          // update tasks array
-         var index = $scope.tasks.indexOf(task);
          $scope.tasks.splice(index, 1);
     }
 
