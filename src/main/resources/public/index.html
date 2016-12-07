@@ -113,8 +113,13 @@
                    ng-click="addTask()">
                     Save
                 </a>
+                <!--
+                $index is a special variable that is
+                available inside ng-repeat, to facilitate
+                CRUD operations with task
+                -->
                 <a href=""
-                   ng-click="deleteTask(task)"
+                   ng-click="deleteTask(task, $index)"
                    class="delete">
                     Delete
                 </a>
