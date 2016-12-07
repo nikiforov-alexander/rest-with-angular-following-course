@@ -2,7 +2,6 @@ package com.example;
 
 import com.example.dao.TaskDao;
 import com.example.dao.TaskDaoImpl;
-import com.example.exception.ApiError;
 import com.example.exception.NotFoundException;
 import com.example.model.Task;
 import com.google.gson.Gson;

@@ -1,7 +1,6 @@
 package com.example;
 
 import com.example.dao.TaskDao;
-import com.example.exception.ApiError;
 import com.example.model.Task;
 import com.example.test_helpers.ApiClient;
 import com.example.test_helpers.ApiResponse;
