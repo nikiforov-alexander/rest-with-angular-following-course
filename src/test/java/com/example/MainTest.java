@@ -134,4 +134,35 @@ public class MainTest {
                 "status", 404
         );
     }
+
+    @Test
+    public void putRequestShouldSaveChangedTask() throws Exception {
+        // Given taskDao with at least task 1
+        assertThat(taskDao.exists(1L)).isTrue();
+        // and newFirstTask that is combined from
+        // old task with changed name
+        Task newFirstTask = taskDao.findOne(1L);
+        newFirstTask.setName("new Task 1");
+
+        // When we change first task's name using PUT
+        // request
+        ApiResponse apiResponse =
+                apiClient.request("PUT",
+                        INDEX_PAGE_ALL_TASKS + "/" + 1,
+                        gson.toJson(newFirstTask)
+                );
+
+        // Then status should be 200
+        assertThat(apiResponse).hasFieldOrPropertyWithValue(
+                "status", 200
+        );
+        // Then body should be null
+        assertThat(apiResponse).hasFieldOrPropertyWithValue(
+                "body", "null"
+        );
+        // Then the firstTask that we sent
+        // should be equal to task in database
+        assertThat(taskDao.findOne(1L))
+                .isEqualTo(newFirstTask);
+    }
 }
