@@ -49,6 +49,8 @@ a {
     .list .item .actions {
       float: right;
       margin-right: 20px; }
+      .list .item .actions .save {
+          margin-left: 10px; }
       .list .item .actions .delete {
         color: #ed5a5a;
         margin-left: 10px; }
