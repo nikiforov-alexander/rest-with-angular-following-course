@@ -20,7 +20,20 @@ a {
   text-align: left; }
   .list .item {
     border-bottom: 2px solid #edeff0;
-    padding: 17px 0 18px 17px; }
+    padding: 17px 0 18px 17px;
+  }
+    /*
+        Flash messages styles
+     */
+    .list .item.flash {
+        text-align: center;
+    }
+    .list .item.flash.success {
+        background-color: lightgreen;
+    }
+    .list .item.flash.error {
+        background-color: #f28888;
+    }
     .list .item label {
       padding-left: 5px;
       cursor: pointer; }
