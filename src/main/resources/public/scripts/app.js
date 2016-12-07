@@ -4,7 +4,11 @@ angular.module("tasksListApp", [])
 
 // IMPORTANT : we have to add 'dataService' here, otherwise
 // we'll get "can't find dataService" error
-.controller('MainController', function ($scope, dataService) {
+// $timeout is injected,  so that we can show/hide
+// flash messages
+.controller('MainController', function ($scope,
+                                        dataService,
+                                        $timeout) {
 
     // we set editing to false so that IDE
     // also sees it, and I think it is a good practice
@@ -34,10 +38,20 @@ angular.module("tasksListApp", [])
     // available when we use them here in controller
     // simple deleteTask, without callback, works but we want
     // do stuff on success
-    // $scope.deleteTask = function (task) {
-    //      dataService.deleteTask(task);
-    //      $scope.flashMessage = "Hello";
-    // }
+    // we create "flash" object and set its "message"
+    // and "status", depending on which different CSS
+    // will be applied
+    // after 3000 ms flash will disappear
+    $scope.deleteTask = function (task) {
+         dataService.deleteTask(task);
+         $scope.flash = {};
+         $scope.flash.message = "Task '" + task.name +
+             "' was successfully deleted";
+         $scope.flash.status = "SUCCESS";
+         $timeout(function () {
+             $scope.flash = null;
+         }, 3000);
+    }
 
 })
 // get tasks from server, service
@@ -58,7 +72,7 @@ angular.module("tasksListApp", [])
     // that will simple work, see NOTE: with
     // $scope.deleteTask = function ...
     // in controller
-    // this.deleteTask = function (task) {
-    //     $http.delete('/api/v1/tasks/' + task.id);
-    // };
+    this.deleteTask = function (task) {
+        $http.delete('/api/v1/tasks/' + task.id);
+    };
 });
