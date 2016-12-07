@@ -58,7 +58,26 @@ angular.module("tasksListApp", [])
          }, 3000);
          // update tasks array
          $scope.tasks.splice(index, 1);
-    }
+    };
+
+    // saves task. Works in 3 steps:
+    // 1. actual dataService call to
+    // make PUT request
+    // 2. create flash message
+    // 3. remove flash after 3000 ms
+    $scope.saveTask = function (task) {
+        // actual service call
+        dataService.saveTask(task);
+        // flash message part
+        $scope.flash = {};
+        $scope.flash.message = "Task '" + task.name +
+            "' was successfully updated";
+        $scope.flash.status = "SUCCESS";
+        // remove flash after 3000 ms
+        $timeout(function () {
+            $scope.flash = null;
+        }, 3000);
+    };
 
 })
 // get tasks from server, service
@@ -81,5 +100,13 @@ angular.module("tasksListApp", [])
     // in controller
     this.deleteTask = function (task) {
         $http.delete('/api/v1/tasks/' + task.id);
+    };
+
+    // save task method
+    // that will simple work, see NOTE: with
+    // $scope.saveTask = function ...
+    // in controller
+    this.saveTask = function (task) {
+        $http.put('/api/v1/tasks/' + task.id, task);
     };
 });
