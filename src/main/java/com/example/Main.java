@@ -5,6 +5,7 @@ import com.example.dao.TaskDaoImpl;
 import com.example.exception.NotFoundException;
 import com.example.model.Task;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -80,6 +81,22 @@ public class Main {
                             request.params("id")
                     );
                     taskDao.delete(id);
+                    return null;
+                },
+                gson::toJson
+        );
+
+        // TODO: one can return "task" and not null
+        // and check for ALL exceptions
+        put(INDEX_PAGE_ALL_TASKS + "/:id",
+                CONTENT_TYPE,
+                (request, response) -> {
+                    Task task = gson.fromJson(
+                            request.body(),
+                            Task.class
+                    );
+                    taskDao.saveOrUpdate(task);
+                    response.status(204);
                     return null;
                 },
                 gson::toJson
