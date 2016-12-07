@@ -54,7 +54,10 @@
           tasks
         -->
         <div ng-repeat="task in tasks"
-             ng-class="{'editing-item': editing == true, 'edited': task.edited == true}"
+             ng-class="{
+             'editing-item': editing == true,
+             'edited': task.edited == true
+             }"
              class="item">
              <!--
              By adding ng-model here, we can save in $scope
