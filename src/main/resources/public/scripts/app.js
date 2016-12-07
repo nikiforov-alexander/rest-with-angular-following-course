@@ -43,7 +43,9 @@ angular.module("tasksListApp", [])
     // will be applied
     // after 3000 ms flash will disappear
     $scope.deleteTask = function (task) {
+         // actual service call
          dataService.deleteTask(task);
+         // flash message part
          $scope.flash = {};
          $scope.flash.message = "Task '" + task.name +
              "' was successfully deleted";
@@ -51,6 +53,9 @@ angular.module("tasksListApp", [])
          $timeout(function () {
              $scope.flash = null;
          }, 3000);
+         // update tasks array
+         var index = $scope.tasks.indexOf(task);
+         $scope.tasks.splice(index, 1);
     }
 
 })
