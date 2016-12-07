@@ -71,9 +71,13 @@
 
             <!--
             ng-show directive with "editing" shows the
-            label when "editing = false"
+            label when "editing = false".
+            When user clicks on label, Task goes into
+            editing mode automatically. In order to get back
+            one has to click elsewhere
             -->
             <label ng-show="editing == false"
+                   ng-click="editing = true"
                    class="editing-label"
                    for="task-name-input">
                 {{task.name}}
