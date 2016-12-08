@@ -77,6 +77,8 @@ angular.module("tasksListApp", [])
         $timeout(function () {
             $scope.flash = null;
         }, 3000);
+        // make task to be not-edited
+        task.edited = false;
     };
 
 })
