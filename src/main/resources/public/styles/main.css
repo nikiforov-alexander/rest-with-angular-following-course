@@ -148,15 +148,15 @@ input, i.e. switch to 'editing-item' class
 /*input[type="checkbox"] {*/
     /*display:none;*/
 /*}*/
-/*input[type="checkbox"] + span {*/
-    /*display:inline-block;*/
-    /*width:19px;*/
-    /*height:19px;*/
-    /*margin:-1px 4px 0 0;*/
-    /*vertical-align:middle;*/
-    /*background:url(checkbox-empty.svg) left top no-repeat;*/
-    /*cursor:pointer;*/
-/*}*/
-/*input[type="checkbox"]:checked + span {*/
-    /*background:url(checkbox-filled.svg) left top no-repeat;*/
-/*}*/
+input[type="checkbox"] {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background:url(checkbox-empty.svg) left top no-repeat;
+    cursor:pointer;
+}
+input[type="checkbox"]:checked {
+    background:url(checkbox-filled.svg) left top no-repeat;
+}
