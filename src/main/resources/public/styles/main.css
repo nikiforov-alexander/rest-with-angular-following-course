@@ -1,74 +1,102 @@
 body {
-  color: #2d3339;
-  font-family: "Varela Round", serif;
-  text-align: center;
-  background: #edeff0;
-  font-size: 16px; }
+    color: #2d3339;
+    font-family: "Varela Round", serif;
+    text-align: center;
+    background: #edeff0;
+    font-size: 16px; }
 
 a {
-  color: #3f8abf;
-  text-decoration: none; }
-  a:hover {
-    color: #65a1cc; }
+    color: #3f8abf;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #65a1cc;
+}
 
 .list {
-  background: #fff;
-  width: 80%;
-  min-width: 500px;
-  margin: 80px auto 0;
-  border-top: 40px solid #5a6772;
-  text-align: left; }
-  .list .item {
+    background: #fff;
+    width: 80%;
+    min-width: 500px;
+    margin: 80px auto 0;
+    border-top: 40px solid #5a6772;
+    text-align: left;
+}
+
+.list .item {
     border-bottom: 2px solid #edeff0;
     padding: 17px 0 18px 17px;
-  }
-    /*
-        Flash messages styles
-     */
-    .list .item.flash {
-        text-align: center;
-    }
-    .list .item.flash.success {
-        background-color: lightgreen;
-    }
-    .list .item.flash.error {
-        background-color: #f28888;
-    }
-    .list .item label {
-      padding-left: 5px;
-      cursor: pointer; }
-    .list .item .editing-label {
-      margin-left: 5px;
-      font-family: "Varela Round", serif;
-      border-radius: 2px;
-      border: 2px solid #a7b9c4;
-      font-size: 16px;
-      padding: 10px 10px 10px 10px;
-      background-color: floralwhite;
-      width: 60%; }
-    .list .item .actions {
-      float: right;
-      margin-right: 20px; }
-      .list .item .actions .save {
-          margin-left: 10px; }
-      .list .item .actions .delete {
-        color: #ed5a5a;
-        margin-left: 10px; }
-        .list .item .actions .delete:hover {
-          color: #f28888; }
-    .list .item.editing .actions {
-      margin-top: 17px; }
-  .list .edited label:after {
+}
+/*
+    Flash messages styles
+ */
+.list .item.flash {
+    text-align: center;
+}
+
+.list .item.flash.success {
+    background-color: lightgreen;
+}
+
+.list .item.flash.error {
+    background-color: #f28888;
+}
+
+.list .item label {
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.list .item .editing-label {
+    margin-left: 5px;
+    font-family: "Varela Round", serif;
+    border-radius: 2px;
+    border: 2px solid #a7b9c4;
+    font-size: 16px;
+    padding: 10px 10px 10px 10px;
+    background-color: floralwhite;
+    width: 60%;
+}
+
+.list .item .actions {
+    float: right;
+    margin-right: 20px;
+}
+
+.list .item .actions .save {
+    margin-left: 10px;
+}
+
+.list .item .actions .delete {
+    color: #ed5a5a;
+    margin-left: 10px;
+}
+
+.list .item .actions .delete:hover {
+    color: #f28888;
+}
+
+.list .item.editing .actions {
+    margin-top: 17px;
+}
+
+.list .edited label:after {
     content: " edited";
     text-transform: uppercase;
     color: #a7b9c4;
     font-size: 14px;
-    padding-left: 5px; }
-  .list .completed label {
+    padding-left: 5px;
+}
+
+.list .completed label {
     color: #a7b9c4;
-    text-decoration: line-through; }
-  .list .add {
-    padding: 25px 0 27px 25px; }
+    text-decoration: line-through;
+}
+
+.list .add {
+    padding: 25px 0 27px 25px;
+}
+
 
 /*input[type="checkbox"] {*/
     /*display:none;*/
