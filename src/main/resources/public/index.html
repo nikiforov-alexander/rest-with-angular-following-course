@@ -66,8 +66,13 @@
              object with property "name".
              For now it seems that $scope.task.name is seen
              whereas not resolved by IDE
+             2. Now when user clicks on checkbox, i.e. makes
+             Task completed, he also makes task.edited = true,
+             i.e. 'Save' button appears
              -->
-            <input ng-model="task.completed" type="checkbox">
+            <input ng-model="task.completed"
+                   type="checkbox"
+                   ng-click="task.edited = true">
 
             <!--
             ng-show directive with "editing" shows the
