@@ -75,6 +75,7 @@ a:hover {
     color: aliceblue;
     background-color: #5a6772;
     border-radius: 5px;
+    border-style: groove;
 }
 
 .list .item .actions .save {
@@ -83,6 +84,7 @@ a:hover {
     background-color: #3f8abf;
     border-radius: 5px;
     margin-left: 5px;
+    border-style: groove;
 }
 
 .list .item .actions .delete {
@@ -91,6 +93,7 @@ a:hover {
     background-color: #f28888;
     border-radius: 5px;
     margin-left: 5px;
+    border-style: groove;
 }
 
 .list .item .actions .delete:hover {
