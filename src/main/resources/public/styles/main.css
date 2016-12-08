@@ -68,6 +68,13 @@ a:hover {
     margin-right: 20px;
 }
 
+.list .item .actions .edit {
+    padding: 10px;
+    color: aliceblue;
+    background-color: #5a6772;
+    border-radius: 5px;
+}
+
 .list .item .actions .save {
     padding: 10px;
     color: aliceblue;
