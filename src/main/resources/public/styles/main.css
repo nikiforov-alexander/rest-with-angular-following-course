@@ -78,6 +78,23 @@ a:hover {
     border-style: groove;
 }
 
+/*
+Styles to apply when we edit 'Task' using
+input, i.e. switch to 'editing-item' class
+ */
+.item.editing-item .actions .edit {
+    position: relative;
+    top: 10px;
+}
+.item.editing-item .actions .save {
+    position: relative;
+    top: 10px;
+}
+.item.editing-item .actions .delete {
+    position: relative;
+    top: 10px;
+}
+
 .list .item .actions .save {
     padding: 10px;
     color: aliceblue;
