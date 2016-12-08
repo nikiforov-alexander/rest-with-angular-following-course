@@ -96,8 +96,14 @@ a:hover {
     border-style: groove;
 }
 
+.list .item .actions .edit:hover {
+    border-color: brown;
+}
+.list .item .actions .save:hover {
+    border-color: brown;
+}
 .list .item .actions .delete:hover {
-    color: #f28888;
+    border-color: brown;
 }
 
 .list .item.editing .actions {
