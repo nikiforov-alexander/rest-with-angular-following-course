@@ -1,0 +1,98 @@
+= Spark REST API with AngularJS to follow course
+:experimental:
+:source-highlighter: coderay
+:toc:
+:toclevels: 5
+:toc-placement: preamble
+:sectnums:
+:main_package: link:./src/main/java/com/example
+:test_package: link:./src/test/java/com/example
+:main_resources: link:./src/main/resources
+:Task: {main_package}/model/Task.java[Task.java]
+:TaskDao: {main_package}/dao/TaskDao.java[TaskDao.java]
+:TaskDaoImpl: {main_package}/dao/TaskDaoImpl.java[TaskDaoImpl.java]
+:Main: {main_package}/Main.java[Main.java]
+:TaskDaoImplTest: {test_package}/dao/TaskDaoImplTest.java[TaskDaoImplTest.java]
+:ApiClient: {test_package}/test_helpers/ApiClient.java[ApiClient.java]
+:ApiResponse: {test_package}/test_helpers/ApiResponse.java[ApiResponse.java]
+:MainTest: {test_package}/MainTest.java[MainTest.java]
+:build_gradle: link:./build.gradle[build.gradle]
+:hibernate_cfg_xml: {main_resources}/hibernate.cfg.xml[hibernate.cfg.xml]
+:hibernate_test_cfg_xml: {main_resources}/hibernate-test.cfg.xml[hibernate-test.cfg.xml]
+:index_html: {main_resources}/public/index.html[index.html]
+:app_js: {main_resources}/public/scripts/app.js[app.js]
+
+toc::[]
+
+== Description
+
+This is a simple http://sparkjava.com[Spark] REST API with AngularJS
+app, that is built along with 
+https://teamtreehouse.com/library/angular-basics[Treehouse Angular Basics Course].
+
+As a database provider http://www.h2database.com/html/main.html[H2 Database]
+is used, and Hibernate is used as ORM.
+
+=== Model
+
+It has for now only one *Model* class:
+
+* {Task}
+
+=== Dao and Database
+
+This task uses DAO interface and implementation:
+
+* {TaskDao}
+* {TaskDaoImpl} 
+
+Hibernate is used with `SessionFactory`, that is build in
+{TaskDaoImpl} constructor and not with 
+`EntityManager` and `persistence.xml` which is a bit outdated.
+Later this can be changed.
+
+Hibernate configuration file {hibernate_cfg_xml}
+is used to build `SessionFactory`. It contains all relevant info about 
+database setup. Nothing fancy : embedded database and show all possible
+SQL options, and etc.
+
+=== Application Runner 
+
+The {Main} class server as *Application Runner* and contains all
+Spark lambdas that serves HTTP requests.
+
+=== Unit Testing
+
+Every method introduced at *DAO* level and HTTP request in
+{Main}, i tried to test, at least with positive test, not 
+catching all possible exceptions.
+
+*DAO* tests can be found in
+
+* {TaskDaoImplTest}
+
+For the *DAO* test, test database is used that is confugured
+with {hibernate_test_cfg_xml} file.
+
+And integration tests can be found in 
+
+* {MainTest}
+
+For the integration tests approach with {ApiClient} and {ApiResponse}
+classes is used, suggested by @craigsdennis in 
+https://teamtreehouse.com/library/build-a-rest-api-in-spark[Spark REST API course].
+
+=== Angular part
+
+I tried my best to describe everything I do in comments, and every step
+in course I watch I try to find solutions for problems myself,
+and then watch how Huston does it.
+
+For now there is only one {app_js} with `MainController` and
+`dataService`.
+
+At this point I can easily delete Tasks and update them.
+
+There is only one {index_html} file and nothing else.
+
+No package manager is used to properly use Angular.
