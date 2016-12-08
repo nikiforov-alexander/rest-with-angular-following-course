@@ -16,6 +16,8 @@ public class Task {
 
     private String name;
 
+    private boolean completed;
+
     // getters and setters
 
     public Long getId() {
@@ -32,6 +34,14 @@ public class Task {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     // constructors
