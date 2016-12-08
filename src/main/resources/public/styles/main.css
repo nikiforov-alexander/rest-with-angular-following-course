@@ -69,12 +69,19 @@ a:hover {
 }
 
 .list .item .actions .save {
-    margin-left: 10px;
+    padding: 10px;
+    color: aliceblue;
+    background-color: #3f8abf;
+    border-radius: 5px;
+    margin-left: 5px;
 }
 
 .list .item .actions .delete {
-    color: #ed5a5a;
-    margin-left: 10px;
+    padding: 10px;
+    color: aliceblue;
+    background-color: #f28888;
+    border-radius: 5px;
+    margin-left: 5px;
 }
 
 .list .item .actions .delete:hover {
