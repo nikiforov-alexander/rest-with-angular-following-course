@@ -58,6 +58,11 @@ a:hover {
     width: 60%;
 }
 
+/*
+ <div class="action"> is a div with action
+ buttons
+ */
+
 .list .item .actions {
     float: right;
     margin-right: 20px;
