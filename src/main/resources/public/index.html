@@ -80,11 +80,16 @@
             When user clicks on label, Task goes into
             editing mode automatically. In order to get back
             one has to click elsewhere
+            2. Important thing here for ng-blur to work:
+            We have to keep in mind that "for" attribute
+            is bound to "id" attribute, and we have to keep
+            then UNIQUE and same for both label and input
+            otherwise, ng-blur will not work
             -->
             <label ng-show="editing == false"
                    ng-click="editing = true"
                    class="editing-label"
-                   for="task-name-input">
+                   for="{{'task-input-' + $index}}">
                 {{task.name}}
             </label>
 
@@ -103,7 +108,7 @@
                    ng-change="task.edited = true"
                    ng-show="editing == true"
                    ng-blur="editing = false"
-                   id="task-name-input"
+                   id="{{'task-input-' + $index}}"
                    type="text"
                    class="editing-label">
 
