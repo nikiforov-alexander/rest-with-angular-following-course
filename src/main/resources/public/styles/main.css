@@ -35,11 +35,13 @@ a:hover {
 }
 
 .list .item.flash.success {
-    background-color: lightgreen;
+    background-color: darkcyan;
+    color: aliceblue;
 }
 
 .list .item.flash.error {
     background-color: #f28888;
+    color: aliceblue;
 }
 
 .list .item label {
