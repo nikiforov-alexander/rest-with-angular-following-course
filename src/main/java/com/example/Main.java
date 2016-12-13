@@ -73,6 +73,17 @@ public class Main {
                 gson::toJson
         );
 
+        // detail page: GET task with given id
+        get(INDEX_PAGE_ALL_TASKS + "/:id",
+                CONTENT_TYPE,
+                (request, response) -> {
+                    Long id = new Long(request.params("id"));
+                    Task task = taskDao.findOne(id);
+                    return task;
+                },
+                gson::toJson
+        );
+
         // DELETE request:
         delete(INDEX_PAGE_ALL_TASKS + "/:id",
                 CONTENT_TYPE,
