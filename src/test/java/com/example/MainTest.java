@@ -165,4 +165,26 @@ public class MainTest {
         assertThat(taskDao.findOne(1L))
                 .isEqualTo(newFirstTask);
     }
+
+    @Test
+    public void getRequestToDetailPageShouldReturnCorrectTaskJson() throws Exception {
+        // Given taskDao with at least task 1
+        assertThat(taskDao.findOne(1L)).isNotNull();
+
+        // When we make GET request to INDEX_PAGE_ALL_TASKS + 1
+        ApiResponse apiResponse = apiClient.request(
+                "GET",
+                INDEX_PAGE_ALL_TASKS + "/" + 1
+        );
+
+        // Then status should be 200
+        assertThat(apiResponse).hasFieldOrPropertyWithValue(
+                "status", 200
+        );
+        // Then the task returned should be equal to first
+        // task from taskDao
+        assertThat(
+                gson.fromJson(apiResponse.getBody(), Task.class)
+        ).isEqualTo(taskDao.findOne(1L));
+    }
 }
