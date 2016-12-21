@@ -5,7 +5,6 @@ import com.example.dao.TaskDaoImpl;
 import com.example.exception.NotFoundException;
 import com.example.model.Task;
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 import java.util.HashMap;
 import java.util.Map;
