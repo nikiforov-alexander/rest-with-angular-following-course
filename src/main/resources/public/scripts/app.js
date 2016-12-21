@@ -14,11 +14,6 @@ tasksListApp.controller('MainController', function ($scope,
     // also sees it, and I think it is a good practice
     $scope.editing = false;
 
-
-    $scope.addTask = function () {
-         console.log("adding Task");
-    };
-
     // only this way response.data will be
     // available, and can be used to set
     // $scope.tasks
