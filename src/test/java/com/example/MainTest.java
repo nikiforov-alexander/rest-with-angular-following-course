@@ -187,4 +187,30 @@ public class MainTest {
                 gson.fromJson(apiResponse.getBody(), Task.class)
         ).isEqualTo(taskDao.findOne(1L));
     }
+
+    @Test
+    public void postRequestWithValidTaskToIndexPageShouldCreateNewTask()
+            throws Exception {
+        // Given taskDao with some tasks
+        // And some Task
+        Task task = new Task("test task");
+
+        // When we make POST request to INDEX_PAGE_ALL_TASKS
+        ApiResponse apiResponse = apiClient.request(
+                "POST",
+                INDEX_PAGE_ALL_TASKS,
+                gson.toJson(task)
+        );
+
+        // Then status should be 201
+        assertThat(apiResponse).hasFieldOrPropertyWithValue(
+                "status", 201
+        );
+
+        // Then the task returned should be equal to last
+        // task from taskDao
+        assertThat(
+                gson.fromJson(apiResponse.getBody(), Task.class)
+        ).isEqualTo(taskDao.findLastAddedTask());
+    }
 }
