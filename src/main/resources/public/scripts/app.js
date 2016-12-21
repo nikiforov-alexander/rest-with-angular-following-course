@@ -1,12 +1,12 @@
 // create angular application, second argument has to be []
 // empty array
-angular.module("tasksListApp", [])
+var tasksListApp = angular.module("tasksListApp", []);
 
 // IMPORTANT : we have to add 'dataService' here, otherwise
 // we'll get "can't find dataService" error
 // $timeout is injected,  so that we can show/hide
 // flash messages
-.controller('MainController', function ($scope,
+tasksListApp.controller('MainController', function ($scope,
                                         dataService,
                                         $timeout) {
 
@@ -81,9 +81,9 @@ angular.module("tasksListApp", [])
         task.edited = false;
     };
 
-})
+});
 // get tasks from server, service
-.service('dataService', function ($http) {
+tasksListApp.service('dataService', function ($http) {
 
     // here we define getTasks as a function that
     // takes callback as argument, and in controller
