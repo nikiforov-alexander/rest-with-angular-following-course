@@ -19,7 +19,7 @@ a:hover {
     width: 80%;
     min-width: 500px;
     margin: 0px auto 0;
-    border-top: 40px solid #5a6772;
+    /*border-top: 40px solid #5a6772;*/
     text-align: left;
 }
 
@@ -140,8 +140,21 @@ input, i.e. switch to 'editing-item' class
     text-decoration: line-through;
 }
 
+/* Styles for Add New Task button up top */
 .list .add {
-    padding: 25px 0 27px 25px;
+    text-align: right;
+    padding: 25px 25px 27px 25px;
+    background-color: #5a6772;
+}
+
+.list .add a{
+    text-align: center;
+    color: aliceblue;
+    text-decoration: none;
+    padding: 10px;
+    border-style: outset;
+    border-radius: 5px;
+    background: darkolivegreen;
 }
 
 
