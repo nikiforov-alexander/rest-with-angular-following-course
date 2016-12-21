@@ -162,6 +162,22 @@ public class TaskDaoImpl implements TaskDao {
         return count;
     }
 
+    /**
+     * Finds the latest added {@code Task} using
+     * @see #getMaxId()
+     * @see #findOne(Long)
+     * @return latest added Task or {@code null} if
+     * DAO is empty
+     */
+    @Override
+    public Task findLastAddedTask() {
+        if (exists(getMaxId())) {
+            return findOne(getMaxId());
+        } else {
+            return null;
+        }
+    }
+
     @Override
     public void closeDatabase() {
         sessionFactory.close();

@@ -20,5 +20,7 @@ public interface TaskDao {
 
     Long count();
 
+    Task findLastAddedTask();
+
     void closeDatabase();
 }
