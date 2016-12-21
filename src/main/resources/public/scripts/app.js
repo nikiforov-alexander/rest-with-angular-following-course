@@ -46,8 +46,10 @@ tasksListApp.controller('MainController', function ($scope,
     // passed here in order to change tasks array
     // accordingly
     $scope.deleteTask = function (task, index) {
-         // actual service call
-         dataService.deleteTask(task);
+         // we call service only if task.id is not null
+         if (task.id != null) {
+             dataService.deleteTask(task);
+         }
          // flash message part
          $scope.flash = {};
          $scope.flash.message = "Task '" + task.name +
@@ -66,8 +68,10 @@ tasksListApp.controller('MainController', function ($scope,
     // 2. create flash message
     // 3. remove flash after 3000 ms
     $scope.saveTask = function (task) {
-        // actual service call
-        dataService.saveTask(task);
+        // we call saveTask only if task is not in database
+        if (task.id != null) {
+            dataService.saveTask(task);
+        }
         // flash message part
         $scope.flash = {};
         $scope.flash.message = "Task '" + task.name +
