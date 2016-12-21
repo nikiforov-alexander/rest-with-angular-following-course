@@ -68,8 +68,12 @@ tasksListApp.controller('MainController', function ($scope,
     // 2. create flash message
     // 3. remove flash after 3000 ms
     $scope.saveTask = function (task) {
-        // we call saveTask only if task is not in database
-        if (task.id != null) {
+        // we call PUT or POST depending
+        // whether we save new or update
+        // old Task
+        if (task.id == null) {
+            dataService.saveNewTask(task);
+        } else {
             dataService.saveTask(task);
         }
         // flash message part
