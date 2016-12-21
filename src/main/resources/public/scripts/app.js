@@ -74,7 +74,7 @@ tasksListApp.controller('MainController', function ($scope,
         if (task.id == null) {
             dataService.saveNewTask(task);
         } else {
-            dataService.saveTask(task);
+            dataService.updateTask(task);
         }
         // flash message part
         $scope.flash = {};
@@ -122,11 +122,11 @@ tasksListApp.service('dataService', function ($http) {
         $http.delete('/api/v1/tasks/' + task.id);
     };
 
-    // save task method
+    // update task method
     // that will simple work, see NOTE: with
     // $scope.saveTask = function ...
     // in controller
-    this.saveTask = function (task) {
+    this.updateTask = function (task) {
         $http.put('/api/v1/tasks/' + task.id, task);
     };
 
