@@ -24,7 +24,6 @@ tasksListApp.controller('MainController', function ($scope,
     // $scope.tasks
     dataService.getTasks(
         function (response) {
-             console.log(response.data);
              $scope.tasks = response.data;
         }
     );
