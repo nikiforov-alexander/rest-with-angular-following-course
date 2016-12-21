@@ -157,4 +157,14 @@ public class TaskDaoImplTest {
         // Then NotFoundException should be thrown
         taskDao.delete(123L);
     }
+
+    @Test
+    public void findLatestAddedTaskShouldReturnNullIfDaoIsEmpty() throws Exception {
+        // Given empty dao
+        // When we findLatestAddedTask
+        // Then null should be returned
+        assertThat(
+                taskDao.findLastAddedTask()
+        ).isNull();
+    }
 }
