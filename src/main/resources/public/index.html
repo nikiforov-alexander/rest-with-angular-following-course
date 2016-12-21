@@ -42,17 +42,11 @@
 
         <!--
         This div is shown only when no Tasks left
-        Simple div with AddNewTask button
         -->
         <div ng-show="tasks.length == 0" class="item">
             <span>No Tasks</span>
-            <div class="actions">
-                <a href=""
-                   ng-click="addTask()">
-                    Add New Task
-                </a>
-            </div>
         </div>
+
         <!--
         1. The ng-class directive applied 'editing-item' class
           to our "div" if, condition is true, i.e. when
