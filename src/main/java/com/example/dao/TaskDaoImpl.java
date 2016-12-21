@@ -171,8 +171,9 @@ public class TaskDaoImpl implements TaskDao {
      */
     @Override
     public Task findLastAddedTask() {
-        if (exists(getMaxId())) {
-            return findOne(getMaxId());
+        Long maxId = getMaxId();
+        if (exists(maxId)) {
+            return findOne(maxId);
         } else {
             return null;
         }
