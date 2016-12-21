@@ -112,6 +112,21 @@ public class Main {
                 gson::toJson
         );
 
+        // POST request creating new Task
+        post(INDEX_PAGE_ALL_TASKS,
+                CONTENT_TYPE,
+                (request, response) -> {
+                    Task task = gson.fromJson(
+                            request.body(),
+                            Task.class
+                    );
+                    taskDao.saveOrUpdate(task);
+                    response.status(201);
+                    return taskDao.findLastAddedTask();
+                },
+                gson::toJson
+        );
+
         // exception handlers
 
         exception(NotFoundException.class, (exception, request, response) -> {
