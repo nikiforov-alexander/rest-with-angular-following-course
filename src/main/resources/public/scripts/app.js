@@ -81,6 +81,16 @@ tasksListApp.controller('MainController', function ($scope,
         task.edited = false;
     };
 
+    // adds new task and pushes at the end
+    // of $scope.tasks array
+    $scope.addNewTask = function () {
+        var task = {
+            name: "New Task",
+            completed: false
+        };
+        $scope.tasks.push(task);
+    }
+
 });
 // get tasks from server, service
 tasksListApp.service('dataService', function ($http) {
