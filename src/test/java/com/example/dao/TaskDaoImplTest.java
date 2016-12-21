@@ -167,4 +167,22 @@ public class TaskDaoImplTest {
                 taskDao.findLastAddedTask()
         ).isNull();
     }
+
+    @Test
+    public void findLatestAddedTaskShouldReturnLatestTask()
+            throws Exception {
+        // Given Dao with 2 tasks
+        addTestTasksToDatabase(2);
+
+        // When we findLatestAddedTask
+        Task latestTask = taskDao.findLastAddedTask();
+
+        // Then found task should be equal to
+        // second Task
+        assertThat(
+                latestTask
+        ).isEqualTo(
+                taskDao.findOne(2L)
+        );
+    }
 }
