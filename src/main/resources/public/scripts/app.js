@@ -121,4 +121,9 @@ tasksListApp.service('dataService', function ($http) {
     this.saveTask = function (task) {
         $http.put('/api/v1/tasks/' + task.id, task);
     };
+
+    // save new task method POST
+    this.saveNewTask = function (task) {
+        $http.post('/api/v1/tasks', task);
+    }
 });
