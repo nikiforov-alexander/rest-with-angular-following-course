@@ -1,4 +1,4 @@
-
+'use strict';
 // get tasks from server, service
 tasksListApp.service('TaskService', function ($http) {
 
