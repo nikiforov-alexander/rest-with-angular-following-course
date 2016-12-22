@@ -20,7 +20,7 @@
 :hibernate_cfg_xml: {main_resources}/hibernate.cfg.xml[hibernate.cfg.xml]
 :hibernate_test_cfg_xml: {main_resources}/hibernate-test.cfg.xml[hibernate-test.cfg.xml]
 :index_html: {main_resources}/public/index.html[index.html]
-:app_js: {main_resources}/public/scripts/app.js[app.js]
+:app_js: {main_resources}/public/scripts/main.js[main.js]
 
 toc::[]
 
