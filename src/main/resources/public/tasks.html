@@ -37,11 +37,15 @@
       This div class will be set to "edited", when
       "task.edited" is true, i.e. when we edited any of our
       tasks
+      'orderBy' filter is used to filter task by
+      their completed.property.
+      ng-class also changes styling when task is completed
     -->
-    <div ng-repeat="task in tasks"
+    <div ng-repeat="task in tasks | orderBy : 'completed'"
          ng-class="{
              'editing-item': editing == true,
-             'edited': task.edited == true
+             'edited': task.edited == true,
+             'completed' : task.completed == true
              }"
          class="item">
         <!--
