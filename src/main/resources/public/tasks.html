@@ -1,0 +1,134 @@
+<!-- By setting this div.ng-controller to mainCtrl
+     We define mainCtrl scope to be inside this div
+ -->
+<div class="list">
+
+    <!--
+        Show flash message if it is not null
+    -->
+    <div ng-show="flash != null"
+         ng-class="{
+             'error': flash.status == 'ERROR',
+             'success': flash.status == 'SUCCESS'
+             }"
+         class="item flash">
+        {{flash.message}}
+    </div>
+
+    <!--
+    This div simply shows a button to add new task
+    -->
+    <div class="add">
+        <a href="#" ng-click="addNewTask()">
+            + Add a New Task</a>
+    </div>
+
+    <!--
+    This div is shown only when no Tasks left
+    -->
+    <div ng-show="tasks.length == 0" class="item">
+        <span>No Tasks</span>
+    </div>
+
+    <!--
+    1. The ng-class directive applied 'editing-item' class
+      to our "div" if, condition is true, i.e. when
+      editing == true.
+      This div class will be set to "edited", when
+      "task.edited" is true, i.e. when we edited any of our
+      tasks
+    -->
+    <div ng-repeat="task in tasks"
+         ng-class="{
+             'editing-item': editing == true,
+             'edited': task.edited == true
+             }"
+         class="item">
+        <!--
+        By adding ng-model here, we can save in $scope
+        variable "task", and use it later on.
+        If we use "task.name", then we'll have "task"
+        object with property "name".
+        For now it seems that $scope.task.name is seen
+        whereas not resolved by IDE
+        2. Now when user clicks on checkbox, i.e. makes
+        Task completed, he also makes task.edited = true,
+        i.e. 'Save' button appears
+        -->
+        <input ng-model="task.completed"
+               type="checkbox"
+               ng-click="task.edited = true">
+
+        <!--
+        ng-show directive with "editing" shows the
+        label when "editing = false".
+        When user clicks on label, Task goes into
+        editing mode automatically. In order to get back
+        one has to click elsewhere
+        2. Important thing here for ng-blur to work:
+        We have to keep in mind that "for" attribute
+        is bound to "id" attribute, and we have to keep
+        then UNIQUE and same for both label and input
+        otherwise, ng-blur will not work
+        -->
+        <label ng-show="editing == false"
+               ng-click="editing = true"
+               class="editing-label"
+               for="{{'task-input-' + $index}}">
+            {{task.name}}
+        </label>
+
+        <!--
+        1. input is shown when "editing = true"
+        2. ng-blur sets editing to false, when
+          we click somewhere outside input, and
+          after that input becomes inactive, while
+          label with ng-show becomes active
+        3. "ng-change" will fire when input changes,
+          setting "task.edited" to "true", so that
+          we change our CSS class in "div" above
+          and show "edited" near our Task.
+        -->
+        <input ng-model="task.name"
+               ng-change="task.edited = true"
+               ng-show="editing == true"
+               ng-blur="editing = false"
+               id="{{'task-input-' + $index}}"
+               type="text"
+               class="editing-label">
+
+        <div class="actions">
+            <a ng-click="editing = !editing"
+               href=""
+               class="edit">
+                Edit
+            </a>
+            <!-- by using ng-click we look in controller for
+                 function, that will be called upon click on this
+                 anchor element. Another fun thing is that
+                 you can probably put ng-click on any element, like
+                 header for example ! and it will work.
+                 Note 2. This 'Save' button will show up only
+                 if Task is edited.
+            -->
+            <a href=""
+               ng-click="saveTask(task)"
+               ng-show="task.edited == true"
+               class="save">
+                Save
+            </a>
+            <!--
+            $index is a special variable that is
+            available inside ng-repeat, to facilitate
+            CRUD operations with task
+            -->
+            <a href=""
+               ng-click="deleteTask(task, $index)"
+               class="delete">
+                Delete
+            </a>
+        </div>
+
+    </div>
+
+</div>
