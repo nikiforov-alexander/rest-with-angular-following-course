@@ -32,5 +32,14 @@ tasksListApp.service('TaskService', function ($http) {
     // save new task method POST
     this.saveNewTask = function (task) {
         $http.post('/api/v1/tasks', task);
+    };
+
+    // saveOrUpdate task method
+    this.saveOrUpdate = function (task) {
+        if (task.id == null) {
+            this.saveNewTask(task);
+        } else {
+            this.updateTask(task);
+        }
     }
 });
