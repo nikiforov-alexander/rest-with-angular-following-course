@@ -157,6 +157,11 @@ input, i.e. switch to 'editing-item' class
     background: darkolivegreen;
 }
 
+.list .add a.save-all {
+    background: cornflowerblue;
+    margin-left: 5px;
+}
+
 
 /*input[type="checkbox"] {*/
     /*display:none;*/
