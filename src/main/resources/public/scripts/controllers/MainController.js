@@ -54,31 +54,26 @@ tasksListApp.controller('MainController', function ($scope,
          $scope.tasks.splice(index, 1);
     };
 
-    // saves task. Works in 3 steps:
-    // 1. actual TaskService call to
-    // make PUT request
-    // 2. create flash message
-    // 3. remove flash after 3000 ms
-    $scope.saveTask = function (task) {
-        // we call PUT or POST depending
-        // whether we save new or update
-        // old Task
-        if (task.id == null) {
-            TaskService.saveNewTask(task);
-        } else {
-            TaskService.updateTask(task);
-        }
-        // flash message part
+    // saves all tasks. Works in 2 steps:
+    // 1. cycle through tasks and save or update them
+    // and make tasks saved unedited
+    // 2. show flash message
+    $scope.saveTasks = function () {
+
+        $scope.tasks.forEach(function (task) {
+            if (task.edited) {
+                TaskService.saveOrUpdate(task);
+                task.edited = false;
+            }
+        });
+
         $scope.flash = {};
-        $scope.flash.message = "Task '" + task.name +
-            "' was successfully updated";
+        $scope.flash.message = "Tasks" +
+            " were successfully saved";
         $scope.flash.status = "SUCCESS";
-        // remove flash after 3000 ms
         $timeout(function () {
             $scope.flash = null;
         }, 3000);
-        // make task to be not-edited
-        task.edited = false;
     };
 
     // adds new task and pushes at the end
