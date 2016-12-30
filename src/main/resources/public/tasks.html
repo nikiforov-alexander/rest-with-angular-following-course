@@ -16,11 +16,19 @@
     </div>
 
     <!--
-    This div simply shows a button to add new task
+    This div simply shows a button to add new task.
+    and 'save all tasks' button.
     -->
     <div class="add">
-        <a href="#" ng-click="addNewTask()">
-            + Add a New Task</a>
+        <a href="#"
+           ng-click="addNewTask()">
+            + Add a New Task
+        </a>
+        <a href="#"
+           class="save-all"
+           ng-click="saveTasks()">
+            Save
+        </a>
     </div>
 
     <!--
@@ -106,20 +114,6 @@
                href=""
                class="edit">
                 Edit
-            </a>
-            <!-- by using ng-click we look in controller for
-                 function, that will be called upon click on this
-                 anchor element. Another fun thing is that
-                 you can probably put ng-click on any element, like
-                 header for example ! and it will work.
-                 Note 2. This 'Save' button will show up only
-                 if Task is edited.
-            -->
-            <a href=""
-               ng-click="saveTask(task)"
-               ng-show="task.edited == true"
-               class="save">
-                Save
             </a>
             <!--
             $index is a special variable that is
